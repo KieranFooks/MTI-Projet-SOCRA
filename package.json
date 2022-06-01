@@ -1,0 +1,27 @@
+{
+  "name": "mti-projet-socra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KieranFooks/MTI-Projet-SOCRA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KieranFooks/MTI-Projet-SOCRA/issues"
+  },
+  "homepage": "https://github.com/KieranFooks/MTI-Projet-SOCRA#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
