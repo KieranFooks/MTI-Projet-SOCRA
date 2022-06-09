@@ -13,3 +13,12 @@ services:
       - ./.mongodb:/data/db
     ports:
       - 27017:27017
+
+  mongodb-test:
+    image: mongo
+    container_name: 'mongodb-test'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - 27018:27017
