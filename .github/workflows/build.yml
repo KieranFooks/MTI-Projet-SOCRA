@@ -22,5 +22,7 @@ jobs:
       with:
         envkey_PORT: 5000
         file_name: .env
+    - name: Launch DB with docker
+      run: npm run db:start
     - name: Run tests
       run: npm run test
