@@ -14,19 +14,19 @@ const request = supertest(app)
  * @group integration/hello
  */
 
-const testUser : User = new User("test@gmail.fr", "password")
+const testUser : User = new User('test@gmail.fr', 'password')
 
-const testModule1 : Module = new Module("S1", [new Subject("Systèmes d'information", "Autour de la gestion de l'information"), new Subject("ERP", "Préparation Certification SAP")])
-const testModule2 : Module = new Module("S2", [new Subject("VueJS", "Initiation au VueJS"), new Subject("SCRUM", "Initiation au SCRUM")])
-const testParcours : Parcours = new Parcours("MTI", "Paris", 24, "Master", 20000, 80, new Date(), [testModule1, testModule2], "Super Majeur")
+const testModule1 : Module = new Module('S1', [new Subject('Systèmes d\'information', 'Autour de la gestion de l\'information'), new Subject('ERP', 'Préparation Certification SAP')])
+const testModule2 : Module = new Module('S2', [new Subject('VueJS', 'Initiation au VueJS'), new Subject('SCRUM', 'Initiation au SCRUM')])
+const testParcours : Parcours = new Parcours('MTI', 'Paris', 24, 'Master', 20000, 80, new Date(), [testModule1, testModule2], 'Super Majeur')
 
 beforeAll(async () => {
   await AppDataSource.initialize()
 })
 
 beforeEach(async () => {
-  await AppDataSource.manager.save(testUser);
-  await AppDataSource.manager.save(testParcours);
+  await AppDataSource.manager.save(testUser)
+  await AppDataSource.manager.save(testParcours)
 
 })
 
@@ -53,5 +53,5 @@ test('GET /mongo should return "Hello World!"', async () => {
 
   expect(get.statusCode).toBe(200)
   expect(get.body.length).toBe(1)
-  expect(get.body[0].title).toBe("MTI")
+  expect(get.body[0].title).toBe('MTI')
 })

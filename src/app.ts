@@ -1,8 +1,8 @@
 import express from 'express'
 import swaggerUi from 'swagger-ui-express'
 import swaggerFile from './swagger.json'
-import { AppDataSource } from "./data-source"
-import { Parcours } from "./entity/Parcours"
+import { AppDataSource } from './data-source'
+import { Parcours } from './entity/Parcours'
 
 
 const app = express()

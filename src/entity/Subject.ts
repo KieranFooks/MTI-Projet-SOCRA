@@ -1,15 +1,15 @@
-import { Column } from "typeorm"
+import { Column } from 'typeorm'
 
 export class Subject {
-    
-    constructor(title: string, description: string) {
-        this.title = title;
-        this.description = description;
-    }
 
-    @Column()
+  constructor(title: string, description: string) {
+    this.title = title
+    this.description = description
+  }
+
+  @Column()
     title: string
 
-    @Column()
+  @Column()
     description: string
 }

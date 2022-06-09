@@ -1,16 +1,16 @@
-import { Column } from "typeorm"
-import { Subject } from "./Subject"
+import { Column } from 'typeorm'
+import { Subject } from './Subject'
 
 export class Module {
 
-    constructor(title: string, subjects: Subject[]) {
-        this.title = title;
-        this.subjects = subjects;
-    }
+  constructor(title: string, subjects: Subject[]) {
+    this.title = title
+    this.subjects = subjects
+  }
 
-    @Column()
+  @Column()
     title: string
 
-    @Column(() => Subject)
+  @Column(() => Subject)
     subjects: Subject[]
 }
