@@ -1,6 +1,10 @@
 import express from 'express'
+import swaggerUi from 'swagger-ui-express'
+import swaggerFile from './swagger.json'
 const app = express()
 const port = 3000
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.get('/', (_req, res) => {
   res.send('Hello World!')
