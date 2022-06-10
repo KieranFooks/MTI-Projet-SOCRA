@@ -29,7 +29,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await AppDataSource.manager.save(testUser)
-  await AppDataSource.manager.save(testParcoursMTI)
 })
 
 afterEach(async () => {
@@ -42,8 +41,6 @@ afterAll(async () => {
 
 
 test('GET /parcours should return 0 parcours', async () => {
-  await AppDataSource.dropDatabase()
-
   const get = await request.get('/parcours')
 
   expect(get.statusCode).toBe(StatusCodes.OK)
@@ -51,6 +48,8 @@ test('GET /parcours should return 0 parcours', async () => {
 })
 
 test('GET /parcours should return the MTI parcours', async () => {
+  await AppDataSource.manager.save(testParcoursMTI)
+
   const get = await request.get('/parcours')
 
   expect(get.statusCode).toBe(StatusCodes.OK)
@@ -59,6 +58,7 @@ test('GET /parcours should return the MTI parcours', async () => {
 })
 
 test('GET /parcours should return the MTI and SRS parcours ordered by creation date DESC', async () => {
+  await AppDataSource.manager.save(testParcoursMTI)
   await AppDataSource.manager.save(testParcoursSRS)
 
   const get = await request.get('/parcours')
