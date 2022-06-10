@@ -30,7 +30,6 @@ beforeAll(async () => {
 beforeEach(async () => {
   await AppDataSource.manager.save(testUser)
   await AppDataSource.manager.save(testParcoursMTI)
-
 })
 
 afterEach(async () => {
