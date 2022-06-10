@@ -5,7 +5,6 @@ import { AppDataSource } from '../../data-source'
 import { Module } from '../../entity/Module'
 import { Parcours } from '../../entity/Parcours'
 import { Subject } from '../../entity/Subject'
-import { User } from '../../entity/User'
 
 const request = supertest(app)
 
@@ -15,7 +14,6 @@ const request = supertest(app)
  * @group integration/parcours
  */
 
-const testUser : User = new User('test@gmail.fr', 'password')
 const testModuleMTI1 : Module = new Module('S1', [new Subject('Systèmes d\'information', 'Autour de la gestion de l\'information'), new Subject('ERP', 'Préparation Certification SAP')])
 const testModuleMTI2 : Module = new Module('S2', [new Subject('VueJS', 'Initiation au VueJS'), new Subject('SCRUM', 'Initiation au SCRUM')])
 const testModuleSRS1 : Module = new Module('S1', [new Subject('Forensic et reverse engineering', 'Initiation aux forensic et reverse engineering'), new Subject('Supervision de sécurité, ingénierie des SOC, détection opérationnelle', 'Initiation à la supervision de sécurité, ingénierie des SOC, détection opérationnelle')])
@@ -25,10 +23,6 @@ const testParcoursSRS : Parcours = new Parcours('SRS', 'Paris', 24, 'Master', 10
 
 beforeAll(async () => {
   await AppDataSource.initialize()
-})
-
-beforeEach(async () => {
-  await AppDataSource.manager.save(testUser)
 })
 
 afterEach(async () => {
