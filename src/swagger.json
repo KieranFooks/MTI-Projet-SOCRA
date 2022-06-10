@@ -27,6 +27,23 @@
           }
         }
       }
+    },
+    "/parcours/": {
+      "get": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Get all parcours ordered by creation date DESC",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Parcours successfully obtained"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        }
+      }
     }
   }
 }
