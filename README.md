@@ -26,6 +26,8 @@ sudo docker-compose up -d
 ```
 This will start a detached docker container for databases.
 
+This container can be stopped using `sudo docker-compose down`
+
 **2. Start server**
 ```
 npm start
