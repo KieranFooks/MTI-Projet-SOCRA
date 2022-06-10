@@ -55,7 +55,7 @@ test('GET /parcours should return the MTI parcours', async () => {
 
   expect(get.statusCode).toBe(StatusCodes.OK)
   expect(get.body.length).toBe(1)
-  expect(get.body[0].title).toBe('MTI')
+  expect(get.body[0].title).toBe(testParcoursMTI.title)
 })
 
 test('GET /parcours should return the MTI and SRS parcours ordered by creation date DESC', async () => {
@@ -65,6 +65,6 @@ test('GET /parcours should return the MTI and SRS parcours ordered by creation d
 
   expect(get.statusCode).toBe(StatusCodes.OK)
   expect(get.body.length).toBe(2)
-  expect(get.body[0].title).toBe('SRS')
-  expect(get.body[1].title).toBe('MTI')
+  expect(get.body[0].title).toBe(testParcoursSRS.title)
+  expect(get.body[1].title).toBe(testParcoursMTI.title)
 })
