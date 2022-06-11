@@ -15,3 +15,8 @@ export async function getAll(campus: string | undefined = undefined, type : stri
 
   return await AppDataSource.manager.find(Parcours, { where: { ...parameters } })
 }
+
+export async function insert(parcours: Parcours): Promise<Parcours> {
+  await AppDataSource.manager.insert(Parcours, parcours)
+  return parcours
+}

@@ -1,7 +1,7 @@
+import { Parcours } from '../../../entity/Parcours'
 import { parcoursRepository } from '../../../repository'
 import { parcoursService } from '../../../service'
 import { testParcoursMTI, testParcoursSRS } from '../../data'
-
 
 /**
  * User integration test
@@ -101,4 +101,14 @@ test('should return 2 parcours when there is 2 parcours, all parameters set', as
   expect(get.length).toEqual(2)
   expect(get[0].title).toEqual(testParcoursSRS.title)
   expect(get[1].title).toEqual(testParcoursMTI.title)
+})
+
+test('Insert parcours should return the parcours', async () => {
+  parcoursRepository.insert = jest.fn(async (parcours: Parcours): Promise<Parcours> => {
+    return parcours
+  })
+
+  const insert = await parcoursService.insert(testParcoursSRS)
+
+  expect(insert).toEqual(testParcoursSRS)
 })

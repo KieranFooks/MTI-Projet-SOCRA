@@ -4,7 +4,7 @@ import { Module } from './Module'
 @Entity()
 export class Parcours {
 
-  constructor(title: string, campus: string, duration: number, type: string, cost: number, presential: number, start: Date, modules: Module[], description: string) {
+  constructor(title: string, campus: string, duration: number, type: string, cost: number, presential: number, start: string, modules: Module[], description: string) {
     this.title = title
     this.campus = campus
     this.duration = duration
@@ -38,7 +38,7 @@ export class Parcours {
     presential: number
 
   @Column()
-    start: Date
+    start: string
 
   @Column(() => Module)
     modules: Module[]
