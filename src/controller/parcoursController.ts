@@ -49,7 +49,7 @@ parcoursController.get('/', async (req, res) => {
 
   /* #swagger.responses[200] = {
     description: 'Parcours successfully obtained',
-    schema: { $ref: '#/definitions/myParcours' }
+    schema: { $ref: '#/definitions/parcoursList' }
   }*/
   res.send(parcours)
 })
@@ -57,7 +57,10 @@ parcoursController.get('/', async (req, res) => {
 parcoursController.post('/create', async (req, res) => {
   /**
    * #swagger.description = 'Create a new parcours'
-   * #swagger.responses[200] = { description: 'Parcours successfully created' }
+   * #swagger.responses[200] = {
+     description: 'Parcours successfully created',
+     schema: { $ref: '#/definitions/parcours' }
+    }
    * #swagger.responses[400] = { description: 'The request is not valid. Body format is incorrect.' }
    * #swagger.responses[500] = { description: 'Server encountered an internal error' }
    *
@@ -65,7 +68,7 @@ parcoursController.post('/create', async (req, res) => {
          in: 'body',
          description: 'Parcours to create',
          required: true,
-         schema: { $ref: '#/definitions/myParcours' }
+         schema: { $ref: '#/definitions/parcours' }
     }
   */
 
