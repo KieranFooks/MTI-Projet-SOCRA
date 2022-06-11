@@ -46,7 +46,10 @@ parcoursController.get('/', async (req, res) => {
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
   }
 
-  // #swagger.responses[200] = { description: 'Parcours successfully obtained' }
+  /* #swagger.responses[200] = {
+    description: 'Parcours successfully obtained',
+    schema: { $ref: '#/definitions/myParcour' }
+  }*/
   res.send(parcours)
 })
 
