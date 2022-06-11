@@ -49,3 +49,13 @@ Run all Jest tests (unit and integration).
 To run unit tests only: `npm run test:unit`
 
 To run integration tests only: `npm run test:integration`
+
+## Start prod env
+```
+docker-compose up -d web
+```
+Launch database and api docker containers.
+
+To access api: http://localhost:8080
+
+To access documentation: http://localhost:8080/doc
