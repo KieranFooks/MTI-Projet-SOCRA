@@ -7,7 +7,7 @@ const PORTDB = parseInt(process.env.PORTDB ?? '27017')
 
 export const AppDataSource = new DataSource({
   type: 'mongodb',
-  host: 'localhost',
+  host: 'mongodb',
   port: PORTDB,
   authSource: 'admin',
   username: 'root',
