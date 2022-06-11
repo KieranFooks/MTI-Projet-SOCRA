@@ -43,6 +43,37 @@
             "description": "Server encountered an internal error"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Get all parcours by keywords relevance",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "keywords": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours successfully obtained"
+          },
+          "400": {
+            "description": "body/keywords are null"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        }
       }
     }
   }
