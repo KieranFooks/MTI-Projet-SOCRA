@@ -2,7 +2,6 @@ import { AppDataSource } from '../../../data-source'
 import { parcoursRepository } from '../../../repository'
 import { testParcoursMTI, testParcoursSRS } from '../../data'
 
-
 /**
  * User integration test
  *
@@ -126,4 +125,12 @@ test('should return 1 parcours when there is 2 parcours, with cost parameter set
 
   expect(get.length).toBe(1)
   expect(get[0].title).toBe(testParcoursSRS.title)
+})
+
+test('Insert parcours should insert the parcours', async () => {
+  await AppDataSource.manager.save(testParcoursMTI)
+
+  const insert = await parcoursRepository.insert(testParcoursSRS)
+
+  expect(insert).toEqual(testParcoursSRS)
 })
