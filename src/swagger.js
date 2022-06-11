@@ -8,6 +8,7 @@ const doc = {
     title: 'SOCRA Parcours',
     description: 'Project for SOCRA'
   },
+  host: null,
   schemes: ['http'],
   consumes: ['application/json'],
   produces: ['application/json'],
