@@ -31,7 +31,7 @@ parcoursController.get('/', async (req, res) => {
   try {
     cost = req.query.cost ? parseInt(req.query.cost.toString()) : undefined
   } catch {
-    // #swagger.responses[400] = { description: 'Parcours successfully obtained' }
+    // #swagger.responses[400] = { description: 'Bad request' }
     res.sendStatus(StatusCodes.BAD_REQUEST)
     return
   }
@@ -39,11 +39,11 @@ parcoursController.get('/', async (req, res) => {
 
   let parcours
   try {
-    // #swagger.responses[500] = { description: 'Server encountered an internal error' }
     parcours = await parcoursService.getAll(campus, type, cost)
   } catch (error) {
-
+    // #swagger.responses[500] = { description: 'Server encountered an internal error' }
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
+    return
   }
 
   /* #swagger.responses[200] = {
