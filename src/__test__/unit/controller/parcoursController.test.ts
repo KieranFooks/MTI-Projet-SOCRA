@@ -21,7 +21,7 @@ const testModuleSRS2 : Module = new Module('S2', [new Subject('Stage en entrepri
 const testParcoursMTI : Parcours = new Parcours('MTI', 'Paris', 24, 'Master', 20000, 80, new Date(), [testModuleMTI1, testModuleMTI2], 'Super Majeur')
 const testParcoursSRS : Parcours = new Parcours('SRS', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Majeur bof bof')
 
-it('should return 2 parcours when there is 2 parcours', async () => {
+test('should return 2 parcours when there is 2 parcours', async () => {
   parcoursService.getAll = jest.fn(async () => {
     return [testParcoursSRS, testParcoursMTI]
   })
@@ -34,7 +34,7 @@ it('should return 2 parcours when there is 2 parcours', async () => {
   expect(get.body[1].title).toEqual(testParcoursMTI.title)
 })
 
-it('should return no parcours when there is 0 parcours', async () => {
+test('should return no parcours when there is 0 parcours', async () => {
   parcoursService.getAll = jest.fn(async () => {
     return []
   })
@@ -45,7 +45,7 @@ it('should return no parcours when there is 0 parcours', async () => {
   expect(get.body.length).toEqual(0)
 })
 
-it('should return an internal server error when an error is catched', async () => {
+test('should return an internal server error when an error is catched', async () => {
   parcoursService.getAll = jest.fn(async () => {
     throw new Error('Database error')
   })
