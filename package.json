@@ -8,7 +8,7 @@
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --fix --ext .ts",
     "swagger-autogen": "node src/swagger.js",
-    "test": "npm run test:unit & npm run test:integration ",
+    "test": "PORTDB=27018 jest -i --config src/jest.config.ts",
     "test:integration": "PORTDB=27018 jest -i --config src/jest.config.ts --group=integration",
     "test:unit": "PORTDB=27018 jest -i --config src/jest.config.ts --group=unit",
     "db:start": "docker-compose up -d",
