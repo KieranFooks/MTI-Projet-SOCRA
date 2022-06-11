@@ -11,8 +11,4 @@ app.use('/parcours', parcoursController
   // #swagger.tags = ['Parcours']
 )
 
-app.get('/', (_req, res) => {
-  res.send('Hello World!')
-})
-
 export default app

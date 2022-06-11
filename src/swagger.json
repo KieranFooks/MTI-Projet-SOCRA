@@ -16,17 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/parcours/": {
       "get": {
         "tags": [
@@ -60,7 +49,7 @@
           "200": {
             "description": "Parcours successfully obtained",
             "schema": {
-              "$ref": "#/definitions/myParcour"
+              "$ref": "#/definitions/myParcours"
             }
           },
           "400": {
@@ -74,7 +63,7 @@
     }
   },
   "definitions": {
-    "myParcour": {
+    "myParcours": {
       "type": "array",
       "items": {
         "type": "object",
