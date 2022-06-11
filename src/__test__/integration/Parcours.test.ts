@@ -85,3 +85,14 @@ test('GET /parcours with campus parameter set to Rennes and type paramter set to
   expect(get.body.length).toBe(1)
   expect(get.body[0].title).toBe(testParcoursSRS.title)
 })
+
+test('Insert parcours should return the parcours', async () => {
+  await AppDataSource.manager.save(testParcoursMTI)
+
+  const insert = await request.post('/parcours/create')
+    .send(testParcoursSRS)
+
+  expect(insert.statusCode).toEqual(StatusCodes.CREATED)
+  expect(insert.body.title).toEqual(testParcoursSRS.title)
+  expect(insert.body._id).toBeDefined()
+})
