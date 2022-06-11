@@ -23,7 +23,7 @@ export function sortByRelevance(p1:Parcours,p2:Parcours,keywords:string): number
     return 0
   return 1
 }
-function relevanceFormula(p:Parcours,keywords:string): number
+export function relevanceFormula(p:Parcours,keywords:string): number
 {
   let m = 0
   let o = 0
@@ -31,7 +31,7 @@ function relevanceFormula(p:Parcours,keywords:string): number
   const n = arr.length
 
   arr.forEach(keyword => {
-    const matched_words_count = (p.description.match(new RegExp(keyword,'g')) || []).length
+    const matched_words_count = (p.description.toUpperCase().match(new RegExp(keyword.toUpperCase(),'g')) || []).length
     if (matched_words_count != 0)
       m += 1
     o+= matched_words_count

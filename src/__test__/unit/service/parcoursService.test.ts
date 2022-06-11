@@ -17,6 +17,12 @@ const testModuleSRS2 : Module = new Module('S2', [new Subject('Stage en entrepri
 const testParcoursMTI : Parcours = new Parcours('MTI', 'Paris', 24, 'Master', 20000, 80, new Date(), [testModuleMTI1, testModuleMTI2], 'Super Majeur')
 const testParcoursSRS : Parcours = new Parcours('SRS', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Majeur bof bof')
 
+const testRelevanceFormula1 : Parcours = new Parcours('Test1', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Après les études vous serez capable de participer aux Comités d’Architecture pour garantir la bonne conformité des bonnes pratiques des APIs. Promouvoir les pratiques API First au sein du groupe. Rédiger / Maintenir un Guideline de développement d’API (création de modèle d’API, ...)')
+const testRelevanceFormula2 : Parcours = new Parcours('Test2', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Après les études vous serez capable de participer aux Comités d’Architecture pour garantir la bonne conformité des bonnes pratiques de développement.')
+const testRelevanceFormula3 : Parcours = new Parcours('Test3', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Après les études vous serez capable de garantir la bonne conformité des bonnes pratiques des APIs. Promouvoir les pratiques API First au sein du groupe. Rédiger / Maintenir un Guideline de développement d’API (création de modèle d’API, ...)')
+const testRelevanceFormula4 : Parcours = new Parcours('Test4', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Après les études vous serez capable de développer l’expérience utilisateur du produit.')
+const testRelevanceFormula5 : Parcours = new Parcours('Test5', 'Paris', 24, 'Master', 10000, 100, new Date(), [testModuleSRS1, testModuleSRS2], 'Après les études vous serez capable de garantir la bonne conformité des bonnes pratiques des APIs. Promouvoir les pratiques API First au sein du groupe. Développement en Java. Mise en place une architecture micro-services avec une structure de code reposant sur une architecture hexagonale.')
+
 test('should return 2 parcours when there is 2 parcours', async () => {
   parcoursRepository.getAll = jest.fn(async () => {
     return [testParcoursMTI, testParcoursSRS]
@@ -49,4 +55,29 @@ test('should return an internal server error when an error is catched', async ()
   }
 
   await expect(call).rejects.toThrow()
+})
+
+test('relevanceFormula 1', async () => {
+  const result = parcoursService.relevanceFormula(testRelevanceFormula1,'java api architecture')
+  expect(result).toEqual(2.5)
+})
+
+test('relevanceFormula 2', async () => {
+  const result = parcoursService.relevanceFormula(testRelevanceFormula2,'java api architecture')
+  expect(result).toEqual(-0.5)
+})
+
+test('relevanceFormula 3', async () => {
+  const result = parcoursService.relevanceFormula(testRelevanceFormula3,'java api architecture')
+  expect(result).toEqual(-2)
+})
+
+test('relevanceFormula 4', async () => {
+  const result = parcoursService.relevanceFormula(testRelevanceFormula4,'java api architecture')
+  expect(result).toEqual(0)
+})
+
+test('relevanceFormula 5', async () => {
+  const result = parcoursService.relevanceFormula(testRelevanceFormula5,'java api architecture')
+  expect(result).toEqual(7.5)
 })
