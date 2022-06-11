@@ -16,7 +16,7 @@ Install project.
 
 **0b. Create a .env file, if not created yet:**
 ```
-'PORT=5000\nPORTDB=27017' > .env
+export PORT=8080
 ```
 Creates a .env file the API port and the database port (default port is 27017).
 
