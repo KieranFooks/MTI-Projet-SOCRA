@@ -23,11 +23,9 @@ parcoursController.get('/', async (_, res) => {
 parcoursController.post('/', async (req, res) => {
   // #swagger.description = 'Get all parcours by keywords relevance'
 
-  if (req.body == null || req.body.keywords == null)
-  {
+  if (req.body == null || req.body.keywords == null) {
     // #swagger.responses[400] = { description: 'body/keywords are null' }
     res.sendStatus(StatusCodes.BAD_REQUEST)
-    return
   }
   let parcours
   try {
@@ -35,6 +33,7 @@ parcoursController.post('/', async (req, res) => {
   } catch (error) {
     // #swagger.responses[500] = { description: 'Server encountered an internal error' }
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
+    return
   }
   // #swagger.responses[200] = { description: 'Parcours successfully obtained' }
   res.send(parcours)
