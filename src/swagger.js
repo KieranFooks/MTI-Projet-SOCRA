@@ -21,7 +21,7 @@ const doc = {
         type: 'Master',
         cost: 25000,
         presential: 50,
-        start: new Date('2025-02'),
+        start: '2023-02',
         modules: [
           {
             title: 'S7',
