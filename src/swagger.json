@@ -5,7 +5,6 @@
     "description": "Project for SOCRA",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http"
@@ -59,13 +58,86 @@
         ],
         "responses": {
           "200": {
-            "description": "Parcours successfully obtained"
+            "description": "Parcours successfully obtained",
+            "schema": {
+              "$ref": "#/definitions/myParcour"
+            }
           },
           "400": {
             "description": "Parcours successfully obtained"
           },
           "500": {
             "description": "Server encountered an internal error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "myParcour": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "MTI"
+          },
+          "campus": {
+            "type": "string",
+            "example": "Paris"
+          },
+          "durantion": {
+            "type": "number",
+            "example": 24
+          },
+          "type": {
+            "type": "string",
+            "example": "Master"
+          },
+          "cost": {
+            "type": "number",
+            "example": 25000
+          },
+          "presential": {
+            "type": "number",
+            "example": 50
+          },
+          "start": {
+            "type": "object",
+            "properties": {}
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "S9"
+                },
+                "subjects": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "example": "Projet IoT / Objet Connecté Médical OpenSource"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Initiation aux bases du projet IoT / Objet Connecté Médical OpenSource"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "example": "La Majeure Santé a pour objectif de former de futurs ingénieurs en informatique pouvant s’interfacer efficacement avec des médecins et tous les professionnels du domaine de la santé.Les étudiants pourront ainsi donner du sens à leur carrière professionnelle en participant à la révolution des applications des données médicales et de l’IA pour la Santé comme, par exemple, l’analyse d’images médicales ou l’analyses de données génétiques ou le développement d’algorithmes pour mieux gérer les maladies des patients via des objets connectés.Du signal à la Data et de la Data à l’IA, les innovations numériques changent les habitudes des soignants et des patients et les ingénieurs font partie de ceux qui révolutionneront la santé de demain."
           }
         }
       }
