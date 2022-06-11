@@ -34,9 +34,34 @@
           "Parcours"
         ],
         "description": "Get all parcours ordered by creation date DESC",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "campus",
+            "in": "query",
+            "description": "Filter search with campus name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter search with type of parcour",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cost",
+            "in": "query",
+            "description": "Filter search with filter with a lower price than the one given",
+            "required": false,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Parcours successfully obtained"
+          },
+          "400": {
             "description": "Parcours successfully obtained"
           },
           "500": {
