@@ -24,8 +24,11 @@ parcoursController.post('/', async (req, res) => {
   // #swagger.description = 'Get all parcours by keywords relevance'
 
   if (req.body == null || req.body.keywords == null)
+  {
     // #swagger.responses[400] = { description: 'body/keywords are null' }
     res.sendStatus(StatusCodes.BAD_REQUEST)
+    return
+  }
   let parcours
   try {
     parcours = await parcoursService.getAllByRelevance(req.body.keywords)
