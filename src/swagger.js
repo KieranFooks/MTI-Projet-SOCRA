@@ -13,7 +13,7 @@ const doc = {
   consumes: ['application/json'],
   produces: ['application/json'],
   definitions: {
-    myParcour: [
+    myParcours: [
       {
         title: 'MTI',
         campus: 'Paris',

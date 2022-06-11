@@ -48,7 +48,7 @@ parcoursController.get('/', async (req, res) => {
 
   /* #swagger.responses[200] = {
     description: 'Parcours successfully obtained',
-    schema: { $ref: '#/definitions/myParcour' }
+    schema: { $ref: '#/definitions/myParcours' }
   }*/
   res.send(parcours)
 })
