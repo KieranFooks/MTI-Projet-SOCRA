@@ -6,6 +6,24 @@ const parcoursController = Router()
 
 parcoursController.get('/', async (req, res) => {
   // #swagger.description = 'Get all parcours ordered by creation date DESC'
+  /* #swagger.parameters['campus'] = {
+    in: 'query',
+    description: 'Filter search with campus name',
+    required: false,
+    type: 'string',
+  } */
+  /* #swagger.parameters['type'] = {
+    in: 'query',
+    description: 'Filter search with type of parcour',
+    required: false,
+    type: 'string',
+  } */
+  /* #swagger.parameters['cost'] = {
+    in: 'query',
+    description: 'Filter search with filter with a lower price than the one given',
+    required: false,
+    type: 'integer',
+  } */
 
   const campus : string | undefined = req.query.campus?.toString()
   const type : string | undefined = req.query.type?.toString()
