@@ -53,7 +53,37 @@
             }
           },
           "400": {
-            "description": "Parcours successfully obtained"
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        }
+      }
+    },
+    "/parcours/create": {
+      "post": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Create a new parcours",
+        "parameters": [
+          {
+            "name": "object",
+            "in": "body",
+            "description": "Parcours to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/myParcours"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours successfully created"
+          },
+          "400": {
+            "description": "The request is not valid. Body format is incorrect."
           },
           "500": {
             "description": "Server encountered an internal error"
@@ -93,8 +123,8 @@
             "example": 50
           },
           "start": {
-            "type": "object",
-            "properties": {}
+            "type": "string",
+            "example": "2023-02"
           },
           "modules": {
             "type": "array",

@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { StatusCodes } from 'http-status-codes'
+import { Parcours } from '../entity/Parcours'
 import { parcoursService } from '../service'
 
 const parcoursController = Router()
@@ -51,6 +52,39 @@ parcoursController.get('/', async (req, res) => {
     schema: { $ref: '#/definitions/myParcours' }
   }*/
   res.send(parcours)
+})
+
+parcoursController.post('/create', async (req, res) => {
+  /**
+   * #swagger.description = 'Create a new parcours'
+   * #swagger.responses[200] = { description: 'Parcours successfully created' }
+   * #swagger.responses[400] = { description: 'The request is not valid. Body format is incorrect.' }
+   * #swagger.responses[500] = { description: 'Server encountered an internal error' }
+   *
+   * #swagger.parameters['object'] = {
+         in: 'body',
+         description: 'Parcours to create',
+         required: true,
+         schema: { $ref: '#/definitions/myParcours' }
+    }
+  */
+
+  let parcours: Parcours
+  try {
+    parcours = req.body as Parcours
+  } catch (error) {
+    res.sendStatus(StatusCodes.BAD_REQUEST)
+    return
+  }
+
+  try {
+    const createdParcours = await parcoursService.insert(parcours)
+
+    res.status(StatusCodes.CREATED)
+    res.send(createdParcours)
+  } catch (error) {
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
+  }
 })
 
 export default parcoursController

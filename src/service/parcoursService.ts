@@ -5,3 +5,7 @@ export async function getAll(campus: string | undefined = undefined, type : stri
   const parcours = await parcoursRepository.getAll(campus, type, cost)
   return parcours.reverse()
 }
+
+export async function insert(parcours: Parcours): Promise<Parcours> {
+  return await parcoursRepository.insert(parcours)
+}
