@@ -30,13 +30,13 @@ afterAll(async () => {
 })
 
 
-it('should return 0 parcours when there is 0 parcours', async () => {
+test('should return 0 parcours when there is 0 parcours', async () => {
   const get = await parcoursRepository.getAll()
 
   expect(get.length).toBe(0)
 })
 
-it('should return 2 parcours when there is 2 parcours', async () => {
+test('should return 2 parcours when there is 2 parcours', async () => {
   await AppDataSource.manager.save(testParcoursMTI)
   await AppDataSource.manager.save(testParcoursSRS)
 
