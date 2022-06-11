@@ -32,6 +32,7 @@ services:
     environment:
       PORT: 8080
       PORTDB: 27017
+      HOST: mongodb
     
     depends_on:
       - mongodb
