@@ -156,7 +156,7 @@ test('Insert parcours should return the parcours', async () => {
   expect(insert.body.title).toEqual(testParcoursSRS.title)
 })
 
-test('Insert parcours should return the parcours', async () => {
+test('Edit description should return code 200', async () => {
   parcoursService.changeDescription = jest.fn(async (): Promise<void> => {
     return
   })
