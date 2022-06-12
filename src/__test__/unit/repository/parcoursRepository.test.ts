@@ -1,4 +1,5 @@
 import { AppDataSource } from '../../../data-source'
+import { Parcours } from '../../../entity/Parcours'
 import { parcoursRepository } from '../../../repository'
 import { testParcoursMTI, testParcoursSRS } from '../../data'
 
@@ -133,4 +134,12 @@ test('Insert parcours should insert the parcours', async () => {
   const insert = await parcoursRepository.insert(testParcoursSRS)
 
   expect(insert).toEqual(testParcoursSRS)
+})
+
+test('Should modify the description', async () => {
+  await AppDataSource.manager.save(testParcoursMTI)
+
+  await parcoursRepository.changeDescription(testParcoursMTI._id.toString(), 'test')
+  const parcoursMTI = await AppDataSource.manager.findOne(Parcours, { where: { title: 'MTI' } })
+  expect(parcoursMTI?.description).toEqual('test')
 })
