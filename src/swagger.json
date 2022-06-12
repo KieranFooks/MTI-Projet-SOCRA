@@ -59,39 +59,6 @@
             "description": "Server encountered an internal error"
           }
         }
-      }
-    },
-    "/parcours/create": {
-      "post": {
-        "tags": [
-          "Parcours"
-        ],
-        "description": "Create a new parcours",
-        "parameters": [
-          {
-            "name": "object",
-            "in": "body",
-            "description": "Parcours to create",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/parcours"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Parcours successfully created",
-            "schema": {
-              "$ref": "#/definitions/parcours"
-            }
-          },
-          "400": {
-            "description": "The request is not valid. Body format is incorrect."
-          },
-          "500": {
-            "description": "Server encountered an internal error"
-          }
-        }
       },
       "post": {
         "tags": [
@@ -118,6 +85,42 @@
           },
           "400": {
             "description": "body/keywords are null"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        }
+      }
+    },
+    "/parcours/create": {
+      "post": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Create a new parcours",
+        "parameters": [
+          {
+            "name": "object",
+            "in": "body",
+            "description": "Parcours to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/parcours"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Parcours successfully created",
+            "schema": {
+              "$ref": "#/definitions/parcours"
+            }
+          },
+          "400": {
+            "description": "The request is not valid. Body format is incorrect."
           },
           "500": {
             "description": "Server encountered an internal error"
