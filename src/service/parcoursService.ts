@@ -1,7 +1,7 @@
 import { Parcours } from '../entity/Parcours'
 import { parcoursRepository } from '../repository'
 
-export async function getAll(campus: string | undefined = undefined, type : string | undefined = undefined, cost : number | undefined = undefined): Promise<Parcours[]> {
+export async function getAll(campus: string | undefined = undefined, type: string | undefined = undefined, cost: number | undefined = undefined): Promise<Parcours[]> {
   const parcours = await parcoursRepository.getAll(campus, type, cost)
   return parcours.reverse()
 }
@@ -41,4 +41,8 @@ export function relevanceFormula(p: Parcours, keywords: string): number {
 
 export async function insert(parcours: Parcours): Promise<Parcours> {
   return await parcoursRepository.insert(parcours)
+}
+
+export async function changeDescription(id: string, description: string): Promise<void> {
+  return await parcoursRepository.changeDescription(id, description)
 }

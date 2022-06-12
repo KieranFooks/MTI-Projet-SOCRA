@@ -26,9 +26,9 @@ parcoursController.get('/', async (req, res) => {
     type: 'integer',
   } */
 
-  const campus : string | undefined = req.query.campus?.toString()
-  const type : string | undefined = req.query.type?.toString()
-  let cost : number | undefined = undefined
+  const campus: string | undefined = req.query.campus?.toString()
+  const type: string | undefined = req.query.type?.toString()
+  let cost: number | undefined = undefined
   try {
     cost = req.query.cost ? parseInt(req.query.cost.toString()) : undefined
   } catch {
@@ -108,6 +108,22 @@ parcoursController.post('/create', async (req, res) => {
   } catch (error) {
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
   }
+})
+
+parcoursController.put('/:id', async (req, res) => {
+
+  if (req.body == null || req.body.description == null) {
+    res.sendStatus(StatusCodes.BAD_REQUEST)
+    return
+  }
+  let parcours
+  try {
+    parcours = await parcoursService.changeDescription(req.params.id, req.body.description)
+  } catch (error) {
+    res.sendStatus(StatusCodes.NOT_FOUND)
+    return
+  }
+  res.send(parcours)
 })
 
 export default parcoursController
