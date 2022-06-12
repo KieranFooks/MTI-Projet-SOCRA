@@ -91,6 +91,50 @@
           "500": {
             "description": "Server encountered an internal error"
           }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Authenticate user.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User authentificated."
+          },
+          "400": {
+            "description": "The request is not valid. Body format is incorrect."
+          },
+          "403": {
+            "description": "User with password not found."
+          },
+          "500": {
+            "description": "Server encountered an internal error."
+          }
         }
       },
       "post": {
