@@ -155,3 +155,14 @@ test('Insert parcours should return the parcours', async () => {
   expect(insert.statusCode).toEqual(StatusCodes.CREATED)
   expect(insert.body.title).toEqual(testParcoursSRS.title)
 })
+
+test('Insert parcours should return the parcours', async () => {
+  parcoursService.changeDescription = jest.fn(async (): Promise<void> => {
+    return
+  })
+
+  const put = await request.put('/parcours/1')
+    .send(testParcoursSRS)
+
+  expect(put.statusCode).toEqual(StatusCodes.OK)
+})
