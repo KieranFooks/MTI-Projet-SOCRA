@@ -125,7 +125,7 @@ parcoursController.post('/create', checkToken, async (req, res) => {
   }
 })
 
-parcoursController.put('/:id', async (req, res) => {
+parcoursController.put('/:id', checkToken, async (req, res) => {
   /**
    * #swagger.description = 'Edit a description'
    * #swagger.responses[200] = {
