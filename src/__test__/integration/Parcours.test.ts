@@ -103,20 +103,28 @@ test('Insert parcours should return the parcours', async () => {
 })
 
 test('Should return code 404', async () => {
-  const put = await request.put('/parcours/1').send({ description: 'test' }).set('Accept', 'application/json')
-
+  await AppDataSource.manager.save(user1)
+  const tokenRequest = await request.post('/auth').send(user1)
+  const token = tokenRequest.text
+  const put = await request.put('/parcours/1').set('Authorization', token).send({ description: 'test' })
   expect(put.statusCode).toEqual(StatusCodes.NOT_FOUND)
 })
 
 test('Should return code 400', async () => {
-  const put = await request.put('/parcours/' + testParcoursMTI._id)
+  await AppDataSource.manager.save(user1)
+  const tokenRequest = await request.post('/auth').send(user1)
+  const token = tokenRequest.text
+  const put = await request.put('/parcours/' + testParcoursMTI._id).set('Authorization', token)
 
   expect(put.statusCode).toEqual(StatusCodes.BAD_REQUEST)
 })
 
 test('Should return code 200', async () => {
+  await AppDataSource.manager.save(user1)
+  const tokenRequest = await request.post('/auth').send(user1)
+  const token = tokenRequest.text
   await AppDataSource.manager.save(testParcoursMTI)
-  const put = await request.put('/parcours/' + testParcoursMTI._id).send({ description: 'test' }).set('Accept', 'application/json')
+  const put = await request.put('/parcours/' + testParcoursMTI._id).set('Authorization', token).send({ description: 'test' })
 
   expect(put.statusCode).toEqual(StatusCodes.OK)
   const res = await request.get('/parcours')
