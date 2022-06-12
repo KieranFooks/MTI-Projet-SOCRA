@@ -1,6 +1,7 @@
 import { StatusCodes } from 'http-status-codes'
 import supertest from 'supertest'
 import app from '../../../app'
+import { Parcours } from '../../../entity/Parcours'
 import { parcoursService } from '../../../service'
 import { testParcoursMTI, testParcoursSRS } from '../../data'
 
@@ -141,4 +142,16 @@ test('should return error 500', async () => {
   const post = await request.post('/parcours').send({ keywords: 'MTI' })
   expect(post.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR)
   expect(post.body).toEqual({})
+})
+
+test('Insert parcours should return the parcours', async () => {
+  parcoursService.insert = jest.fn(async (): Promise<Parcours> => {
+    return testParcoursSRS
+  })
+
+  const insert = await request.post('/parcours/create')
+    .send(testParcoursSRS)
+
+  expect(insert.statusCode).toEqual(StatusCodes.CREATED)
+  expect(insert.body.title).toEqual(testParcoursSRS.title)
 })

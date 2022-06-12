@@ -38,3 +38,7 @@ export function relevanceFormula(p: Parcours, keywords: string): number {
   })
   return m * o - 0.5 * n * o
 }
+
+export async function insert(parcours: Parcours): Promise<Parcours> {
+  return await parcoursRepository.insert(parcours)
+}

@@ -1,7 +1,7 @@
+import { Parcours } from '../../../entity/Parcours'
 import { parcoursRepository } from '../../../repository'
 import { parcoursService } from '../../../service'
 import { testParcoursMTI, testParcoursSRS, testRelevanceFormula1, testRelevanceFormula2, testRelevanceFormula3, testRelevanceFormula4, testRelevanceFormula5 } from '../../data'
-
 
 /**
  * User integration test
@@ -128,7 +128,6 @@ test('relevanceFormula 5', async () => {
   expect(result).toEqual(7.5)
 })
 
-
 test('should return MTI parcours first', async () => {
   parcoursRepository.getAll = jest.fn(async () => {
     return [testParcoursSRS, testParcoursMTI]
@@ -181,4 +180,14 @@ test('should return 0', () => {
 test('should return 1', async () => {
   const result = parcoursService.sortByRelevance(testParcoursMTI, testParcoursSRS, 'bof')
   expect(result).toEqual(1)
+})
+
+test('Insert parcours should return the parcours', async () => {
+  parcoursRepository.insert = jest.fn(async (parcours: Parcours): Promise<Parcours> => {
+    return parcours
+  })
+
+  const insert = await parcoursService.insert(testParcoursSRS)
+
+  expect(insert).toEqual(testParcoursSRS)
 })
