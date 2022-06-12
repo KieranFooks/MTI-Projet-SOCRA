@@ -78,7 +78,7 @@ parcoursController.post('/', async (req, res) => {
 parcoursController.post('/create', checkToken, async (req, res) => {
   /**
    * #swagger.description = 'Create a new parcours'
-   * #swagger.responses[200] = {
+   * #swagger.responses[201] = {
      description: 'Parcours successfully created',
      schema: { $ref: '#/definitions/parcours' }
     }

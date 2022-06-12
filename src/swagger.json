@@ -67,34 +67,32 @@
             "description": "Server encountered an internal error"
           }
         }
-      }
-    },
-    "/parcours/create": {
+      },
       "post": {
         "tags": [
           "Parcours"
         ],
-        "description": "Create a new parcours",
+        "description": "Get all parcours by keywords relevance",
         "parameters": [
           {
-            "name": "object",
+            "name": "body",
             "in": "body",
-            "description": "Parcours to create",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/parcours"
+              "type": "object",
+              "properties": {
+                "keywords": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Parcours successfully created",
-            "schema": {
-              "$ref": "#/definitions/parcours"
-            }
+            "description": "Parcours successfully obtained"
           },
           "400": {
-            "description": "The request is not valid. Body format is incorrect."
+            "description": "body/keywords are null"
           },
           "500": {
             "description": "Server encountered an internal error"
@@ -144,32 +142,37 @@
             "description": "Server encountered an internal error."
           }
         }
-      },
+      }
+    },
+    "/parcours/create": {
       "post": {
         "tags": [
           "Parcours"
         ],
-        "description": "Get all parcours by keywords relevance",
+        "description": "Create a new parcours",
         "parameters": [
           {
-            "name": "body",
+            "name": "object",
             "in": "body",
+            "description": "Parcours to create",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "keywords": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/parcours"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Parcours successfully obtained"
+            "description": "OK"
+          },
+          "201": {
+            "description": "Parcours successfully created",
+            "schema": {
+              "$ref": "#/definitions/parcours"
+            }
           },
           "400": {
-            "description": "body/keywords are null"
+            "description": "The request is not valid. Body format is incorrect."
           },
           "500": {
             "description": "Server encountered an internal error"
