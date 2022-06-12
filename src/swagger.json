@@ -9,6 +9,14 @@
   "schemes": [
     "http"
   ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Please enter a valid token to test the admin requests below..."
+    }
+  },
   "consumes": [
     "application/json"
   ],
@@ -90,6 +98,92 @@
       }
     },
     "/parcours/create": {
+
+      "post": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Get all parcours by keywords relevance",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "keywords": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours successfully obtained"
+          },
+          "400": {
+            "description": "body/keywords are null"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Authenticate user.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "new description",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User authentificated."
+          },
+          "400": {
+            "description": "The request is not valid. Body format is incorrect."
+          },
+          "403": {
+            "description": "User with password not found."
+          },
+          "500": {
+            "description": "Server encountered an internal error."
+          }
+        }
+      }
+    },
+    "/parcours/create": {
       "post": {
         "tags": [
           "Parcours"
@@ -108,6 +202,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK"
+          },
+          "201": {
             "description": "Parcours successfully created",
             "schema": {
               "$ref": "#/definitions/parcours"
@@ -115,47 +212,6 @@
           },
           "400": {
             "description": "The request is not valid. Body format is incorrect."
-          },
-          "500": {
-            "description": "Server encountered an internal error"
-          }
-        }
-      }
-    },
-    "/parcours/{id}": {
-      "put": {
-        "tags": [
-          "Parcours"
-        ],
-        "description": "Edit a description",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "description",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "example": "any"
-                }
-              }
-            },
-            "description": "new description",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Description successfully edited"
-          },
-          "400": {
-            "description": "No description in the request body"
           },
           "404": {
             "description": "Could not find the parcours"

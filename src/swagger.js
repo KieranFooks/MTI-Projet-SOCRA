@@ -12,6 +12,14 @@ const doc = {
   schemes: ['http'],
   consumes: ['application/json'],
   produces: ['application/json'],
+  securityDefinitions: {
+    Bearer: {
+      type: 'apiKey',
+      in: 'header',
+      name: 'Authorization',
+      description: 'Please enter a valid token to test the admin requests below...'
+    }
+  },
   definitions: {
     parcoursList: [
       {
