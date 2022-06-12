@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { Parcours } from '../entity/Parcours'
 import { parcoursService } from '../service'
+import checkToken from './checkToken'
 
 const parcoursController = Router()
 
@@ -74,7 +75,7 @@ parcoursController.post('/', async (req, res) => {
   res.send(parcours)
 })
 
-parcoursController.post('/create', async (req, res) => {
+parcoursController.post('/create', checkToken, async (req, res) => {
   /**
    * #swagger.description = 'Create a new parcours'
    * #swagger.responses[200] = {
@@ -90,6 +91,9 @@ parcoursController.post('/create', async (req, res) => {
          required: true,
          schema: { $ref: '#/definitions/parcours' }
     }
+  * #swagger.security = [{
+        "Bearer": []
+    }]
   */
 
   let parcours: Parcours

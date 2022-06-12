@@ -2,6 +2,7 @@ conn = new Mongo()
 db = conn.getDB('SOCRA')
 
 db.user.insert({ 'email': 'test@gmail.com', 'password': 'pwd' })
+db.user.insert({ 'email': 'test@outlook.com', 'password': '123456' })
 
 //Parcours 1
 db.parcours.insert({

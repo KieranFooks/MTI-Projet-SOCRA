@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import supertest from 'supertest'
 import app from '../../app'
 import { AppDataSource } from '../../data-source'
-import { testParcoursMTI, testParcoursSRS } from '../data'
+import { testParcoursMTI, testParcoursSRS, user1 } from '../data'
 
 const request = supertest(app)
 
@@ -88,8 +88,13 @@ test('GET /parcours with campus parameter set to Rennes and type paramter set to
 
 test('Insert parcours should return the parcours', async () => {
   await AppDataSource.manager.save(testParcoursMTI)
+  await AppDataSource.manager.save(user1)
+
+  const tokenRequest = await request.post('/auth').send(user1)
+  const token = tokenRequest.text
 
   const insert = await request.post('/parcours/create')
+    .set('Authorization', token)
     .send(testParcoursSRS)
 
   expect(insert.statusCode).toEqual(StatusCodes.CREATED)
