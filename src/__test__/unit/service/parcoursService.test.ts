@@ -177,7 +177,7 @@ test('should return 0', () => {
   expect(result).toEqual(0)
 })
 
-test('should return 1', async () => {
+test('should return 1', () => {
   const result = parcoursService.sortByRelevance(testParcoursMTI, testParcoursSRS, 'bof')
   expect(result).toEqual(1)
 })
