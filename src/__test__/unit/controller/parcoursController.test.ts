@@ -113,6 +113,37 @@ test('should return 2 parcours when there is 2 parcours, all parameters set', as
   expect(get.body[1].title).toEqual(testParcoursMTI.title)
 })
 
+test('should return MTI parcours first', async () => {
+  parcoursService.getAllByRelevance = jest.fn(async () => {
+    return [testParcoursMTI, testParcoursSRS]
+  })
+  const post = await request.post('/parcours').send({ keywords: 'MTI' }).set('Accept', 'application/json')
+
+  expect(post.statusCode).toEqual(StatusCodes.OK)
+  expect(post.body.length).toEqual(2)
+  expect(post.body[0].title).toEqual(testParcoursMTI.title)
+  expect(post.body[1].title).toEqual(testParcoursSRS.title)
+})
+
+test('should return error 400', async () => {
+  parcoursService.getAllByRelevance = jest.fn(async () => {
+    return [testParcoursMTI, testParcoursSRS]
+  })
+  const post = await request.post('/parcours')
+  expect(post.statusCode).toEqual(StatusCodes.BAD_REQUEST)
+  expect(post.body).toEqual({})
+})
+
+test('should return error 500', async () => {
+  parcoursService.getAllByRelevance = jest.fn(async () => {
+    throw new Error('Database error')
+  })
+
+  const post = await request.post('/parcours').send({ keywords: 'MTI' })
+  expect(post.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR)
+  expect(post.body).toEqual({})
+})
+
 test('Insert parcours should return the parcours', async () => {
   parcoursService.insert = jest.fn(async (): Promise<Parcours> => {
     return testParcoursSRS

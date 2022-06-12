@@ -54,6 +54,26 @@ parcoursController.get('/', async (req, res) => {
   res.send(parcours)
 })
 
+parcoursController.post('/', async (req, res) => {
+  // #swagger.description = 'Get all parcours by keywords relevance'
+
+  if (req.body == null || req.body.keywords == null) {
+    // #swagger.responses[400] = { description: 'body/keywords are null' }
+    res.sendStatus(StatusCodes.BAD_REQUEST)
+    return
+  }
+  let parcours
+  try {
+    parcours = await parcoursService.getAllByRelevance(req.body.keywords)
+  } catch (error) {
+    // #swagger.responses[500] = { description: 'Server encountered an internal error' }
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
+    return
+  }
+  // #swagger.responses[200] = { description: 'Parcours successfully obtained' }
+  res.send(parcours)
+})
+
 parcoursController.post('/create', async (req, res) => {
   /**
    * #swagger.description = 'Create a new parcours'

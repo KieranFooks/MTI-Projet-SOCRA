@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && node dist/server.js",
     "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --fix --ext .ts",
+    "type": "eslint . --fix --ext .ts",
     "swagger-autogen": "node src/swagger.js",
     "test": "PORTDB=27018 jest -i --config src/jest.config.ts",
     "test:integration": "PORTDB=27018 jest -i --config src/jest.config.ts --group=integration",
