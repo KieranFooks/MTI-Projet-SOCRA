@@ -59,6 +59,34 @@
             "description": "Server encountered an internal error"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Get all parcours by keywords relevance",
+        "parameters": [
+          {
+            "name": "keywords",
+            "in": "body",
+            "description": "relevance keywords",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/parcours"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours successfully obtained"
+          },
+          "400": {
+            "description": "body/keywords are null"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        }
       }
     },
     "/parcours/create": {
@@ -92,35 +120,45 @@
             "description": "Server encountered an internal error"
           }
         }
-      },
-      "post": {
+      }
+    },
+    "/parcours/{id}": {
+      "put": {
         "tags": [
           "Parcours"
         ],
-        "description": "Get all parcours by keywords relevance",
+        "description": "Edit a description",
         "parameters": [
           {
-            "name": "body",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "keywords": {
+                "description": {
                   "example": "any"
                 }
               }
-            }
+            },
+            "description": "new description",
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "Parcours successfully obtained"
+            "description": "Description successfully edited"
           },
           "400": {
-            "description": "body/keywords are null"
+            "description": "No description in the request body"
           },
-          "500": {
-            "description": "Server encountered an internal error"
+          "404": {
+            "description": "Could not find the parcours"
           }
         }
       }
