@@ -1,9 +1,10 @@
 import { StatusCodes } from 'http-status-codes'
 import supertest from 'supertest'
 import app from '../../../app'
+import { AppDataSource } from '../../../data-source'
 import { Parcours } from '../../../entity/Parcours'
 import { parcoursService } from '../../../service'
-import { testParcoursMTI, testParcoursSRS } from '../../data'
+import { testParcoursMTI, testParcoursSRS, user1 } from '../../data'
 
 /**
  * User integration test
@@ -145,15 +146,24 @@ test('should return error 500', async () => {
 })
 
 test('Insert parcours should return the parcours', async () => {
+  await AppDataSource.initialize()
+
   parcoursService.insert = jest.fn(async (): Promise<Parcours> => {
     return testParcoursSRS
   })
 
+  await AppDataSource.manager.save(user1)
+
+  const tokenRequest = await request.post('/auth').send(user1)
+  const token = tokenRequest.text
+
   const insert = await request.post('/parcours/create')
+    .set('Authorization', token)
     .send(testParcoursSRS)
 
   expect(insert.statusCode).toEqual(StatusCodes.CREATED)
   expect(insert.body.title).toEqual(testParcoursSRS.title)
+  await AppDataSource.destroy()
 })
 
 test('Insert parcours should return the parcours', async () => {
