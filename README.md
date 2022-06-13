@@ -20,7 +20,7 @@ To avoid redudant values in tests, we have grouped the values used to initialize
 - `supertest`: To simulate requests during tests
 
 ### Tests
-To test our solution, with have made some unit tests (`./src/__test__/unit`) and some integration tests (`./src/__test__/integration`).
+To test our solution, we have made some unit tests (`./src/__test__/unit`) and some integration tests (`./src/__test__/integration`).
 
 ### Routes
 - GET `/parcours`: return all parcours in DESC order. This route can also be used with query strings:
