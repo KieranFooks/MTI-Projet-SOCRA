@@ -163,6 +163,23 @@ test('Insert parcours should return the parcours', async () => {
 
   expect(insert.statusCode).toEqual(StatusCodes.CREATED)
   expect(insert.body.title).toEqual(testParcoursSRS.title)
-
   await AppDataSource.destroy()
+})
+
+test('Edit description should return code 200', async () => {
+  await AppDataSource.initialize()
+
+  parcoursService.changeDescription = jest.fn(async (): Promise<void> => {
+    return
+  })
+  await AppDataSource.manager.save(user1)
+
+  const tokenRequest = await request.post('/auth').send(user1)
+  const token = tokenRequest.text
+
+  const put = await request.put('/parcours/1').set('Authorization', token).send({ description: 'test' })
+
+  expect(put.statusCode).toEqual(StatusCodes.OK)
+  await AppDataSource.destroy()
+
 })

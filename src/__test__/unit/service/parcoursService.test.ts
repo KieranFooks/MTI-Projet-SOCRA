@@ -191,3 +191,12 @@ test('Insert parcours should return the parcours', async () => {
 
   expect(insert).toEqual(testParcoursSRS)
 })
+
+test('Edit parcours description should return void', async () => {
+  parcoursRepository.changeDescription = jest.fn(async (): Promise<void> => {
+    return
+  })
+
+  const put = await parcoursService.changeDescription('test', 'test')
+  expect(put).toBeUndefined()
+})

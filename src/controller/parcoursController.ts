@@ -27,9 +27,9 @@ parcoursController.get('/', async (req, res) => {
     type: 'integer',
   } */
 
-  const campus : string | undefined = req.query.campus?.toString()
-  const type : string | undefined = req.query.type?.toString()
-  let cost : number | undefined = undefined
+  const campus: string | undefined = req.query.campus?.toString()
+  const type: string | undefined = req.query.type?.toString()
+  let cost: number | undefined = undefined
   try {
     cost = req.query.cost ? parseInt(req.query.cost.toString()) : undefined
   } catch {
@@ -56,7 +56,16 @@ parcoursController.get('/', async (req, res) => {
 })
 
 parcoursController.post('/', async (req, res) => {
-  // #swagger.description = 'Get all parcours by keywords relevance'
+  /**
+ * #swagger.description = 'Get all parcours by keywords relevance'
+  *
+  * #swagger.parameters['keywords'] = {
+        in: 'body',
+        description: 'relevance keywords',
+        required: true,
+        schema: { $ref: '#/definitions/parcours' }
+  }
+  */
 
   if (req.body == null || req.body.keywords == null) {
     // #swagger.responses[400] = { description: 'body/keywords are null' }
@@ -71,7 +80,9 @@ parcoursController.post('/', async (req, res) => {
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
     return
   }
-  // #swagger.responses[200] = { description: 'Parcours successfully obtained' }
+  /* #swagger.responses[200] = { description: 'Parcours successfully obtained' }
+    schema: { $ref: '#/definitions/parcoursList' }
+  }*/
   res.send(parcours)
 })
 
@@ -112,6 +123,35 @@ parcoursController.post('/create', checkToken, async (req, res) => {
   } catch (error) {
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR)
   }
+})
+
+parcoursController.put('/:id', checkToken, async (req, res) => {
+  /**
+   * #swagger.description = 'Edit a description'
+   * #swagger.responses[200] = {
+     description: 'Description successfully edited',
+    }
+   * #swagger.responses[404] = { description: 'Could not find the parcours' }
+   * #swagger.responses[400] = { description: 'No description in the request body' }
+   *
+   * #swagger.parameters['description'] = {
+    in: 'body',
+    description: 'new description',
+    required: true,
+    }
+  */
+  if (req.body == null || req.body.description == null) {
+    res.sendStatus(StatusCodes.BAD_REQUEST)
+    return
+  }
+  let parcours
+  try {
+    parcours = await parcoursService.changeDescription(req.params.id, req.body.description)
+  } catch (error) {
+    res.sendStatus(StatusCodes.NOT_FOUND)
+    return
+  }
+  res.send(parcours)
 })
 
 export default parcoursController

@@ -75,6 +75,37 @@
         "description": "Get all parcours by keywords relevance",
         "parameters": [
           {
+            "name": "keywords",
+            "in": "body",
+            "description": "relevance keywords",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/parcours"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours successfully obtained"
+          },
+          "400": {
+            "description": "body/keywords are null"
+          },
+          "500": {
+            "description": "Server encountered an internal error"
+          }
+        }
+      }
+    },
+    "/parcours/create": {
+
+      "post": {
+        "tags": [
+          "Parcours"
+        ],
+        "description": "Get all parcours by keywords relevance",
+        "parameters": [
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -113,7 +144,13 @@
         "description": "Authenticate user.",
         "parameters": [
           {
-            "name": "body",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
             "in": "body",
             "schema": {
               "type": "object",
@@ -125,7 +162,9 @@
                   "example": "any"
                 }
               }
-            }
+            },
+            "description": "new description",
+            "required": true
           }
         ],
         "responses": {
@@ -174,8 +213,8 @@
           "400": {
             "description": "The request is not valid. Body format is incorrect."
           },
-          "500": {
-            "description": "Server encountered an internal error"
+          "404": {
+            "description": "Could not find the parcours"
           }
         }
       }

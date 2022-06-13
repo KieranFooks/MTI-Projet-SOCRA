@@ -1,10 +1,10 @@
 import { AppDataSource } from '../data-source'
 import { Parcours } from '../entity/Parcours'
 
-export async function getAll(campus: string | undefined = undefined, type : string | undefined = undefined, cost : number | undefined = undefined): Promise<Parcours[]> {
+export async function getAll(campus: string | undefined = undefined, type: string | undefined = undefined, cost: number | undefined = undefined): Promise<Parcours[]> {
   let parameters = {}
   if (campus !== undefined) {
-    parameters = { ...parameters, campus: { $eq: campus} }
+    parameters = { ...parameters, campus: { $eq: campus } }
   }
   if (type !== undefined) {
     parameters = { ...parameters, type: { $eq: type } }
@@ -19,4 +19,11 @@ export async function getAll(campus: string | undefined = undefined, type : stri
 export async function insert(parcours: Parcours): Promise<Parcours> {
   await AppDataSource.manager.insert(Parcours, parcours)
   return parcours
+}
+
+export async function changeDescription(id: string, description: string): Promise<void> {
+  await AppDataSource.manager.update(Parcours,
+    id,
+    { description: description }
+  )
 }
