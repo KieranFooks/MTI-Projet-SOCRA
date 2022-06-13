@@ -8,14 +8,14 @@ Both the database and the API are deployed via docker.
 ### Design Patern
 The API is using a Controller (`./src/controller`) - Service (`./src/service`) - Repository (`./src/repository`) - Model  (`./src/entity`) architecture.
 
-We are using a singleton to acess the database (`./src/data-source.ts`).
+We are using a singleton to access the database (`./src/data-source.ts`).
 
-To evitate redudant values in tests, with have grouped the values used to initialized the database.
+To avoid redudant values in tests, we have grouped the values used to initialize the database.
 
 ### Used Librairies
 - `swagger-autogen`: To generate the swagger of the API thanks to the comments in the code
 - `typescript`: To use types in js
-- `typeorm`: To generate an orm that is used to comunicate with the database
+- `typeorm`: ORM that is used to comunicate with the database
 - `jest`: The test framework
 - `supertest`: To simulate requests during tests
 
@@ -23,17 +23,17 @@ To evitate redudant values in tests, with have grouped the values used to initia
 To test our solution, with have made some unit tests (`./src/__test__/unit`) and some integration tests (`./src/__test__/integration`).
 
 ### Routes
-- GET `/parcours`: return all parcours in DESC order. This route can also be used the querys:
-  - if the `campus` query is set, it will return all parcours which match the given campus
-  - if the `type` query is set, it will return all parcours which match the given type
-  - if the `cost` query is set, it will return all parcours which cost is less than the given value
+- GET `/parcours`: return all parcours in DESC order. This route can also be used with query strings:
+  - if `campus` is set, it will return all parcours which match the given campus
+  - if `type` is set, it will return all parcours which match the given type
+  - if `cost` is set, it will return all parcours which cost is less than the given value
 - POST `/parcours/create`: If the user is connected, add a new parcours
 - PUT `/parcours/:id`: modify the description of a parcours thanks to it's id 
 - POST `/parcours`: return all parcours ordered by keywords pertinence
   - body format: `{ keywords: "word1 word2 word3" }`
 - POST `/auth`: get JWT token with the email and password
   - body format: `{ email: "test@gmail.com", password: "pwd"}`
-  - The user in tha database has as email: `test@gmail.com` and as password: `pwd`
+  - The user in the database has an email: `test@gmail.com` and a password: `pwd`
 
 ## Main Directory
 - `./github`: Files about the CI configuration
